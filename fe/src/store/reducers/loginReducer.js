@@ -20,7 +20,7 @@ export default function (state = initialState, action) {
       return { ...state, authenticationIsInProgress: false, authenticated: true, data: action.payload, errors: {} };
 
     case loginActions.AUTH_USER.FAIL:
-      return { ...state, authenticationIsInProgress: false, authenticated: false, data: {}, errors: action.errors };
+      return { ...state, authenticationIsInProgress: false, authenticated: true, data: {}, errors: action.errors };
 
     case loginActions.UNAUTH_USER:
       return { ...state, authenticationIsInProgress: false, authenticated: false, data: {}, errors: {} };

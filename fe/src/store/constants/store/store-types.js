@@ -1,3 +1,3 @@
+export const DASHBOARD = 'teams';
 export const LOGIN = 'login';
-export const SIGNUP = 'signup';
 export const FORM = 'form';

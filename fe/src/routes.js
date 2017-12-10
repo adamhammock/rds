@@ -10,11 +10,13 @@ import NotFoundPage from './components/common/not-found-page';
 import Login from './components/auth/login';
 import Logout from './components/auth/logout';
 import RequireAuth from './components/auth/requireAuth';
+import Dashboard from './components/dashboard';
 
 export default (
   <Route path="/" component={App}>
-    <IndexRoute component={Login} />
+    <IndexRoute component={RequireAuth(Dashboard)} />
     <Route path="login" component={Login} />
+    <Route path="dashboard" component={RequireAuth(Dashboard)} />
     <Route path="logout" component={Logout} /> 
     <Route path="*" component={NotFoundPage} />
   </Route>

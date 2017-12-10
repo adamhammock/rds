@@ -21,8 +21,8 @@ class Login extends Component {
 
   onSuccessLogin(payload) {
     const { token, user } = payload;
-    cookie.save('token', token.token, { path: '/' });
-    cookie.save('user', user, { path: '/' });
+    /* cookie.save('token', token.token, { path: '/' });
+    cookie.save('user', user, { path: '/' }); */
     window.location.href = CLIENT_URL;
   };
 

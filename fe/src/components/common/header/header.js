@@ -6,20 +6,16 @@ class HeaderTemplate extends Component {
   renderLinks() {
     if (this.props.authenticated) {
       return [
-        <li key={`${1}header`}>
-          <Link to="/users">Users</Link>
-        </li>,
         <li key={`${2}header`}>
           <Link to="logout">Logout</Link>
         </li>,
       ];
-    } else {
-      return [
-        <li key={1}>
-          <Link to="login">Login</Link>
-        </li>,
-      ];
     }
+    return [
+      <li key={1}>
+        <Link to="login">Login</Link>
+      </li>,
+    ];
   }
 
   render() {
