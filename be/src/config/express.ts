@@ -1,3 +1,4 @@
+import * as socketio from 'socket.io';
 import * as express from 'express';
 import * as morgan from 'morgan';
 import * as bodyParser from 'body-parser';
@@ -5,6 +6,7 @@ import * as compress from 'compression';
 import * as methodOverride from 'method-override';
 import * as cors from 'cors';
 import * as helmet from 'helmet';
+import * as http from 'http';
 import * as routes from './../api/routing';
 import config from './vars';
 import * as error from '../api/middlewares/error';
@@ -14,6 +16,8 @@ import * as error from '../api/middlewares/error';
 * @public
 */
 const app = express();
+const httpServer = http.createServer(app); // eslint-disable-line new-cap
+const io = socketio(httpServer);
 
 // request logging. dev: console | production: file
 app.use(morgan(config.logs));
@@ -47,4 +51,8 @@ app.use(error.notFound);
 // error handler, send stacktrace only during development
 app.use(error.handler);
 
-export default app;
+export default {
+    httpServer,
+    app,
+    io
+};
