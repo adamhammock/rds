@@ -1,9 +1,9 @@
 /* eslint-disable class-methods-use-this */
 import "reflect-metadata";
 import { createConnection } from "typeorm";
-import isNil from 'lodash/isNil';
+import * as isNil from 'lodash/isNil';
 
-class TypeOrm {
+export default class TypeOrm {
   connection;
   constructor() {
     this.connection = null;
@@ -25,5 +25,3 @@ class TypeOrm {
     return this.connect();
   }
 }
-
-module.exports = TypeOrm;
