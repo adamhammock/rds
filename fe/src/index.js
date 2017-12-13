@@ -5,10 +5,13 @@ import { Router, browserHistory } from 'react-router';
 import store from './store';
 import routes from './routes';
 
-// Import stylesheets like this, if you choose: import './public/stylesheets/base.scss';
+import 'font-awesome/css/font-awesome.min.css';
+import 'simple-line-icons/css/simple-line-icons.css';
+// import './../scss/style.scss'
+import './../scss/core/_dropdown-menu-right.scss'
 
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory} routes={routes} />
   </Provider>,
-  document.querySelector('.wrapper'));
+  document.querySelector('#root'));
