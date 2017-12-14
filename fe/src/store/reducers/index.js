@@ -1,12 +1,14 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import loginReducer from './loginReducer';
+import socketReducer from './socketReducer';
 import * as storeTypes from '../constants/store/store-types';
 import LogoutActions from '../constants/action-types/login';
 
 const rootReducer = combineReducers({
   [storeTypes.LOGIN]: loginReducer,
   [storeTypes.FORM]: formReducer,
+  [storeTypes.SOCKET]: socketReducer,
 });
 
 export default (state, action) => {

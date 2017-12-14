@@ -10,10 +10,9 @@ import DummyManager from './../app/handlers/dummy/DummyManager';
 import DummyList from './../app/handlers/dummy/DummyList';
 import DummyRepository from './../app/handlers/dummy/DummyRepository';
 
-
-
 import StandardNotification from './../app/handlers/notifications/models/StandardNotification';
 
+let i = 0;
 
 export default async function services(container, io) {
   const connection = await (new TypeOrm()).getConnection();
@@ -29,7 +28,12 @@ export default async function services(container, io) {
   );
 
   const socketService = new SocketService(container.get('io'));
-
+  setInterval(() => {
+    i = i + 1;
+    socketService.send({
+      queue: 'dashboard.chart', payload: [i, Math.floor(Math.random() * 1000)]
+    });
+  }, 2000);
   container.registerService(
     'notification.socketService',
     socketService
@@ -45,6 +49,6 @@ export default async function services(container, io) {
     container.get('notification.socketService')
   ));
 
-  const notification = new StandardNotification(SocketNotificationType.MY_DUMMY_TYPE, {queue: 'test', payload: {}})
+  const notification = new StandardNotification(SocketNotificationType.MY_DUMMY_TYPE, { queue: 'test', payload: {} })
   await notificationManager.sendNotification(notification)
 };

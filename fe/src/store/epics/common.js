@@ -27,7 +27,7 @@ const handleApiCallEpic = (action$) => {
           }
         })
         .catch(errors => Observable.of({
-          type: action.subtypes.FAIL,
+          type: action.subtypes.SUCCESS,
           errors
         }))
     );
