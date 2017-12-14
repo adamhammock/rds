@@ -36,6 +36,20 @@ app.use(methodOverride());
 // secure apps by setting various HTTP headers
 app.use(helmet());
 
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:8080');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, content-type, Access-Control-Allow-Origin, Authorization');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    if (req.method === 'OPTIONS') {
+        return res.sendStatus(200);
+    }
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.header('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.header('Pragma', 'no-cache');
+    return next();
+})
+
 // enable CORS - Cross Origin Resource Sharing
 app.use(cors());
 
