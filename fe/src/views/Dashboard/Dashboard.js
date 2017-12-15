@@ -23,8 +23,14 @@ import {
   Table
 } from "reactstrap";
 
+import io from 'socket.io-client';
+var socket = io('http://localhost:3000');
+
+
 import ReactHighcharts from 'react-highcharts'; // Expects that Highcharts was loaded in the code.
 import ReactHighstock from 'react-highcharts/ReactHighstock.src';
+
+let series // TODO: ouch
 
 const config = {
   chart: {
@@ -32,12 +38,16 @@ const config = {
              load: function () {
 
                  // set up the updating of the chart each second
-                 var series = this.series[0];
-                 setInterval(function () {
-                     var x = (new Date()).getTime(), // current time
-                         y = Math.round(Math.random() * 100);
-                     series.addPoint([x, y], true, true);
-                 }, 1000);
+                 // var series = this.series[0];
+                 console.log("init series")
+                 series = this.series[0]
+                 // console.log(series)
+                 // setInterval(function () {
+                 //     var x = (new Date()).getTime(), // current time
+                 //         y = Math.round(Math.random() * 100);
+                 //     series.addPoint([x, y], true, true);
+                 //     console.log("add point", x, y)
+                 // }, 1000);
              }
          }
      },
@@ -75,12 +85,12 @@ const config = {
                  time = (new Date()).getTime(),
                  i;
 
-             for (i = -999; i <= 0; i += 1) {
-                 data.push([
-                     time + i * 1000,
-                     Math.round(Math.random() * 100)
-                 ]);
-             }
+             // for (i = -999; i <= 0; i += 1) {
+             //     data.push([
+             //         time + i * 1000,
+             //         Math.round(Math.random() * 100)
+             //     ]);
+             // }
              return data;
          }())
      }]
@@ -491,6 +501,20 @@ class Dashboard extends Component {
     });
   }
 
+  componentWillMount() {
+    socket.on('connection', function(socket) {
+      console.log("connection")
+      socket.on('dashboard.chart', function(msg) {
+        console.log('message: ' + msg);
+      });
+    });
+    socket.on('dashboard.chart', function(msg) {
+      console.log('message: ' + msg);
+      series.addPoint(msg)
+    });
+
+
+  }
 
   render() {
 

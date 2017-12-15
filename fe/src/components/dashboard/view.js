@@ -16,6 +16,7 @@ class Dashboard extends Component {
   }
 
   async componentWillMount() {
+    console.log("Dashboard.componentWillMount")
     await this.props.connectSocket();
     await this.props.on(DASHBOARD_CHART, data => console.log(this.props.config));
   }
