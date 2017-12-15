@@ -10,9 +10,17 @@ import DummyManager from './../app/handlers/dummy/DummyManager';
 import DummyList from './../app/handlers/dummy/DummyList';
 import DummyRepository from './../app/handlers/dummy/DummyRepository';
 
+import AccountList from './../app/handlers/account/AccountList';
+import AccountManager from './../app/handlers/account/AccountManager';
+import AccountRepository from './../app/handlers/account/AccountRepository';
+
+import UserList from './../app/handlers/user/UserList';
+import UserManager from './../app/handlers/user/UserManager';
+import UserRepository from './../app/handlers/user/UserRepository';
+
 import StandardNotification from './../app/handlers/notifications/models/StandardNotification';
 
-let i = 0;
+let id = 1315187;
 
 export default async function services(container, io) {
   const connection = await (new TypeOrm()).getConnection();
@@ -28,12 +36,6 @@ export default async function services(container, io) {
   );
 
   const socketService = new SocketService(container.get('io'));
-  setInterval(() => {
-    i = i + 1;
-    socketService.send({
-      queue: 'dashboard.chart', payload: [i, Math.floor(Math.random() * 1000)]
-    });
-  }, 2000);
   container.registerService(
     'notification.socketService',
     socketService
@@ -42,13 +44,27 @@ export default async function services(container, io) {
   container.registerService('dummy.repository', new DummyRepository(connection));
   container.registerService('dummy.manager', new DummyManager(container.get('dummy.repository')));
   container.registerService('dummy.list', new DummyList(container.get('dummy.repository')));
+  /* setInterval(async () => {
+    const dummyList = container.get('dummy.list');
+    id = id + 1;
+    const dummy = await dummyList.findOne({ id });
+    console.log('dummy', dummy);
+    socketService.send({
+      queue: 'dashboard.chart', payload: [id, dummy.pressure]
+    });
+  }, 2000); */
+
+  container.registerService('account.repository', new AccountRepository(connection));
+  container.registerService('account.manager', new AccountManager(container.get('account.repository')));
+  container.registerService('account.list', new AccountList(container.get('account.repository')));
+
+  container.registerService('user.repository', new UserRepository(connection));
+  container.registerService('user.manager', new UserManager(container.get('user.repository')));
+  container.registerService('user.list', new UserList(container.get('user.repository')));
 
   notificationManager.registerDispatcher(new SocketNotificationDispatcher(
     SocketNotificationType.MY_DUMMY_TYPE,
     new SocketNotificationBuilder(),
     container.get('notification.socketService')
   ));
-
-  const notification = new StandardNotification(SocketNotificationType.MY_DUMMY_TYPE, { queue: 'test', payload: {} })
-  await notificationManager.sendNotification(notification)
 };

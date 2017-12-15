@@ -8,8 +8,8 @@ import * as cors from 'cors';
 import * as helmet from 'helmet';
 import * as http from 'http';
 import * as routes from './../api/routing';
-import config from './vars';
 import * as error from '../api/middlewares/error';
+import config from './vars';
 
 /**
 * Express instance
