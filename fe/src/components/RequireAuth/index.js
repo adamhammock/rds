@@ -6,7 +6,7 @@ import requireAuthView from './require-auth';
 
 export default function (ComposedComponent) {
   const mapStateToProps = state => ({
-    authenticated: state.login.authenticated,
+    authenticated: state.login.authenticated || state.register.authenticated ,
     ComposedComponent
   });
 

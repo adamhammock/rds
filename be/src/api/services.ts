@@ -20,8 +20,6 @@ import UserRepository from './../app/handlers/user/UserRepository';
 
 import StandardNotification from './../app/handlers/notifications/models/StandardNotification';
 
-let id = 1315187;
-
 export default async function services(container, io) {
   const connection = await (new TypeOrm()).getConnection();
   container.registerService('typeorm.connection', connection);
@@ -46,8 +44,7 @@ export default async function services(container, io) {
   container.registerService('dummy.list', new DummyList(container.get('dummy.repository')));
   /* setInterval(async () => {
     const dummyList = container.get('dummy.list');
-    id = id + 1;
-    const dummy = await dummyList.findOne({ id });
+    const dummy = await dummyList.findOne();
     console.log('dummy', dummy);
     socketService.send({
       queue: 'dashboard.chart', payload: [id, dummy.pressure]

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import cookie from 'react-cookies';
 
-import { CLIENT_URL } from '../../../config/config';
+import { CLIENT_URL } from './../../config/config';
 
 class Logout extends Component {
   componentWillMount() {

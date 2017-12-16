@@ -11,14 +11,15 @@ export default class Authentication extends Component {
   }
 
   componentWillMount() {
+    console.log(this.props.history)
     if (!this.props.authenticated) {
-      this.context.router.push('/login');
+      this.props.history.push('/login');
     }
   }
 
   componentWillUpdate(nextProps) {
     if (!nextProps.authenticated) {
-      this.context.router.push('/login');
+      this.props.history.push('/login');
     }
   }
 

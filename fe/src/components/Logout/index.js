@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { logoutUser } from '../../../store/actions/login';
+import { logoutUser } from './../../store/actions/login';
 import logoutView from './logout';
 
 const mapStateToProps = state => {};

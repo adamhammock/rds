@@ -4,8 +4,8 @@ export default {
       name: 'Dashboard',
       url: '/dashboard',
       icon: 'icon-speedometer',
-        },
-    {
+    },
+    /* {
       title: true,
       name: 'Reports',
       wrapper: {            // optional wrapper object
@@ -129,7 +129,7 @@ export default {
           icon: 'icon-star'
         }
       ]
-    },
+    },*/
     {
       name: 'Export Data',
       url: 'http://coreui.io/react/',

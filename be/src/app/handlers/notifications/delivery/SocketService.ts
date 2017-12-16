@@ -7,7 +7,6 @@ export default class SocketService {
 
   async send(notification) {
     const { payload, queue } = notification;
-    console.log(notification);
     return this.io.sockets.emit(queue, payload);
   }
 }
