@@ -1,27 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
-
-/**
- *
-    - Position(completions, reservoir, production, data manager, upper management, technology, etc)
-    - Asset / Play(eagleford, Permian, STACK / Scoop, Marcellus, Utica, Bakken, etc)
- */
-enum Position {
-  COMPLETIONS = 'completions',
-  RESERVOIR = 'reservoir',
-  PRODUCTION = 'production',
-  DATA_MANAGER = 'data manager',
-  UPPER_MANAGER = 'upper management',
-  TECHNOLOGY = 'technology',
-}
-
-enum Asset {
-  EAGLEFORD = 'eagleford',
-  PERMIAN = 'permian',
-  STACK_SCOOP = 'stack / scoop',
-  MARCELUS = 'marcellus',
-  UTICA = 'utica',
-  BAKKER = 'bakken'
-}
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import { Account } from "./Account";
+import { USER_POSITION, USER_ASSET, USER_TYPE } from './../app/etc/Constants';
 
 @Entity()
 export class User {
@@ -51,9 +30,15 @@ export class User {
   state: string;
 
   @Column({ nullable: true })
-  position: Position;
+  position: USER_POSITION;
 
   @Column({ nullable: true })
-  asset: Asset;
+  asset: USER_ASSET;
+
+  @Column({ default: USER_TYPE.REGULAR })
+  type: USER_TYPE;
+
+  @ManyToOne(type => Account, account => account.users)
+  account: Account;
 
 }

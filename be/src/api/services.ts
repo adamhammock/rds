@@ -1,5 +1,7 @@
 import TypeOrm from './../config/typeorm';
 
+import * as Constants from './../app/etc/Constants';
+
 import SocketNotificationType from './../app/handlers/notifications/models/SocketNotificationType';
 import NotificationManager from './../app/handlers/notifications/NotificationManager';
 import SocketNotificationDispatcher from './../app/handlers/notifications/dispatchers/SocketNotificationDispatcher';
@@ -23,6 +25,8 @@ import StandardNotification from './../app/handlers/notifications/models/Standar
 export default async function services(container, io) {
   const connection = await (new TypeOrm()).getConnection();
   container.registerService('typeorm.connection', connection);
+
+  container.registerService('Constants', Constants);
 
   container.registerService('io', io);
 

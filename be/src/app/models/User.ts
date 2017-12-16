@@ -1,4 +1,4 @@
-import Constants from '../etc/Constants';
+import { USER_PENDING_STATUS, USER_ACTIVE_STATUS } from '../etc/Constants';
 
 export default class User {
   id;
@@ -11,8 +11,8 @@ export default class User {
   position;
   state;
   asset;
-  USER_PENDING_STATUS = Constants.USER_PENDING_STATUS;
-  USER_ACTIVE_STATUS = Constants.USER_ACTIVE_STATUS;
+  PENDING_STATUS = USER_PENDING_STATUS;
+  ACTIVE_STATUS = USER_ACTIVE_STATUS;
   constructor(data) {
     this.id = data.id;
     this.username = data.username;
