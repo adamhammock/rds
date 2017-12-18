@@ -46,14 +46,17 @@ export default async function services(container, io) {
   container.registerService('dummy.repository', new DummyRepository(connection));
   container.registerService('dummy.manager', new DummyManager(container.get('dummy.repository')));
   container.registerService('dummy.list', new DummyList(container.get('dummy.repository')));
-  /* setInterval(async () => {
-    const dummyList = container.get('dummy.list');
-    const dummy = await dummyList.findOne();
+  const dummyList = container.get('dummy.list');
+  const dummy = await dummyList.findOne();
+  id = dummy.id;
+  setInterval(async () => {
+    const dummy = await dummyList.findOne({ id });
+    let id = dummy.id + 1;
     console.log('dummy', dummy);
     socketService.send({
-      queue: 'dashboard.chart', payload: [id, dummy.pressure]
+      queue: 'dashboard.chart', payload: [(new Date()).getTime(), dummy.pressure]
     });
-  }, 2000); */
+  }, 2000);
 
   container.registerService('account.repository', new AccountRepository(connection));
   container.registerService('account.manager', new AccountManager(container.get('account.repository')));

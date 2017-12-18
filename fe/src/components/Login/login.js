@@ -46,7 +46,7 @@ class Login extends Component {
     |-------------------------------------------------------------------------------
     */
     const data = {};
-    this.props.loginUser(formProps, this.onSuccessLogin);
+    this.props.loginUser(data, this.onSuccessLogin);
   };
 
   onCloseAlert() {

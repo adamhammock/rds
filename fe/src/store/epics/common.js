@@ -16,7 +16,11 @@ import commonActions from '../constants/action-types/common';
 const handleApiCallEpic = (action$) => {
   return action$.ofType(commonActions.COMMON_API_CALL)
     .mergeMap(action =>
-      Observable.fromPromise(action.promise())
+      Observable.fromPromise(action.promise()
+        .catch(errors => Observable.of({
+          type: action.subtypes.FAIL,
+          errors
+        })))
         .map((payload) => {
           if (action.onSuccessCallback && _.isFunction(action.onSuccessCallback)) {
             action.onSuccessCallback(payload);
@@ -26,10 +30,6 @@ const handleApiCallEpic = (action$) => {
             payload,
           }
         })
-        .catch(errors => Observable.of({
-          type: action.subtypes.SUCCESS,
-          errors
-        }))
     );
 };
 

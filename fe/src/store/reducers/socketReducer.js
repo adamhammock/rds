@@ -12,7 +12,7 @@ const initialState = Map({
     },
     series: [{
       name: 'PSI',
-      data: [0, 1]
+      data: [[(new Date()).getTime(), 1]]
     }]
   }
 });

@@ -1,7 +1,7 @@
 import * as isNil from 'lodash/isNil';
 import * as ExpressPromiseRouter from 'express-promise-router';
 import * as httpStatus from 'http-status';
-import APIError from './../utils/APIError';
+import APIError from './../../utils/APIError';
 
 
 const router = ExpressPromiseRouter();
