@@ -614,7 +614,7 @@ class Dashboard extends Component {
             <Card>
               <CardBlock className="card-body">
                 <div className="chart-wrapper" style={{ height: 400 + 'px', marginTop: 40 + 'px' }}>
-                  <ReactHighcharts config={config} height={300}></ReactHighcharts>
+                  <ReactHighcharts config={this.props.config} height={300}></ReactHighcharts>
                 </div>
               </CardBlock>
             </Card>
