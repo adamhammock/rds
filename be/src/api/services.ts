@@ -48,10 +48,10 @@ export default async function services(container, io) {
   container.registerService('dummy.list', new DummyList(container.get('dummy.repository')));
   const dummyList = container.get('dummy.list');
   const dummy = await dummyList.findOne();
-  id = dummy.id;
+  let id = dummy.id;
   setInterval(async () => {
     const dummy = await dummyList.findOne({ id });
-    let id = dummy.id + 1;
+    id = dummy.id + 1;
     console.log('dummy', dummy);
     socketService.send({
       queue: 'dashboard.chart', payload: [(new Date()).getTime(), dummy.pressure]
