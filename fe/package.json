@@ -29,6 +29,7 @@
     "file-loader": "^1.1.5",
     "font-awesome": "^4.7.0",
     "fusioncharts": "^3.12.1",
+    "highcharts": "^6.0.4",
     "html-loader": "^0.5.1",
     "html-webpack-plugin": "^2.30.1",
     "immutable": "^3.8.2",
@@ -40,10 +41,11 @@
     "react-cookies": "^0.1.0",
     "react-dom": "^15.6.1",
     "react-fusioncharts": "^1.0.4",
-    "react-highcharts": "^15.0.0",
+    "react-jsx-highcharts": "^2.0.3",
     "react-paginate": "^4.4.3",
     "react-redux": "^5.0.5",
     "react-router": "^2.8.1",
+    "react-router-dom": "4.2.2",
     "react-transition-group": "^2.2.1",
     "reactstrap": "^4.8.0",
     "redux": "^3.7.1",
@@ -53,8 +55,7 @@
     "redux-thunk": "^2.2.0",
     "rxjs": "^5.5.5",
     "simple-line-icons": "^2.4.1",
-    "socket.io-client": "^2.0.4",
-    "react-router-dom": "4.2.2"
+    "socket.io-client": "^2.0.4"
   },
   "scripts": {
     "start": "webpack-dev-server --inline --hot"

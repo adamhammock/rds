@@ -5,7 +5,8 @@ import { connectSocket, disconnectSocket, on } from './../../store/actions/socke
 import dashbordView from './view';
 
 const mapStateToProps = state => ({
-  config: state.socket.config,
+  yAxis: state.socket.yAxis,
+  xAxis: state.socket.xAxis,
 });
 
 const mapDispatchToProps = dispatch =>

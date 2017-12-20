@@ -5,16 +5,8 @@ import socketActions from '../constants/action-types/socket';
 
 // Define initial state
 const initialState = Map({
-  config: {
-    chart: {},
-    title: {
-      text: 'DFIT'
-    },
-    series: [{
-      name: 'PSI',
-      data: [[(new Date()).getTime(), 1]]
-    }]
-  }
+  yAxis: [],
+  xAxis: []
 });
 
 // Handle actions
@@ -34,12 +26,9 @@ export default function (state = initialState, action) {
 
     case socketActions.ON.SUCCESS:
       const { payload } = action;
-      const series = state.config.series.map(serie => {
-        const data = [...serie.data, payload];
-        return { ...serie, data }
-      });
-      const config = { ...state.config, series };
-      return { ...state, config };
+      const yAxis = [...state.yAxis, payload[1]];
+      const xAxis = [...state.xAxis, payload[0]];
+      return { ...state, yAxis, xAxis };
 
     case socketActions.ON.FAIL:
       return state;

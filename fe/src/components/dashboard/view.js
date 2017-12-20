@@ -23,8 +23,10 @@ import {
   Table
 } from "reactstrap";
 
-import ReactHighcharts from 'react-highcharts'; // Expects that Highcharts was loaded in the code.
-import ReactHighstock from 'react-highcharts/ReactHighstock.src';
+import Highcharts from 'highcharts';
+import {
+  HighchartsChart, Chart, withHighcharts, XAxis, YAxis, Title, Subtitle, Legend, LineSeries
+} from 'react-jsx-highcharts';
 
 const DASHBOARD_CHART = 'dashboard.chart';
 
@@ -489,7 +491,7 @@ class Dashboard extends Component {
 
   async componentWillMount() {
     await this.props.connectSocket();
-    await this.props.on(DASHBOARD_CHART, data => console.log(this.props.config));
+    await this.props.on(DASHBOARD_CHART, data => {});
   }
 
   async componentWillUnmount() {
@@ -498,7 +500,7 @@ class Dashboard extends Component {
 
   toggle() {
     this.setState({
-      dropdownOpen: !this.state.dropdownOpen
+      dropdownOpen: !this.state.dropdownOpen,
     });
   }
 
@@ -614,7 +616,24 @@ class Dashboard extends Component {
             <Card>
               <CardBlock className="card-body">
                 <div className="chart-wrapper" style={{ height: 400 + 'px', marginTop: 40 + 'px' }}>
-                  <ReactHighcharts config={this.props.config} height={300}></ReactHighcharts>
+                  <HighchartsChart>
+                    <Chart />
+
+                    <Title>Solar Employment Growth by Sector, 2010-2016</Title>
+
+                    <Subtitle>Source: thesolarfoundation.com</Subtitle>
+
+                    <Legend layout="vertical" align="right" verticalAlign="middle" />
+
+                    <XAxis categories={this.props.xAxis}>
+                      <XAxis.Title>Time</XAxis.Title>
+                    </XAxis>
+
+                    <YAxis id="number">
+                      <YAxis.Title>Number of employees</YAxis.Title>
+                      <LineSeries id="other" name="Other" data={this.props.yAxis} />
+                    </YAxis>
+                  </HighchartsChart>
                 </div>
               </CardBlock>
             </Card>
@@ -625,4 +644,4 @@ class Dashboard extends Component {
   }
 }
 
-export default Dashboard;
+export default withHighcharts(Dashboard, Highcharts);
