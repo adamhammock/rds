@@ -22,6 +22,8 @@ import UserRepository from './../app/handlers/user/UserRepository';
 
 import StandardNotification from './../app/handlers/notifications/models/StandardNotification';
 
+import Energentwellheader from './../app/lib/Energentwellheader';
+
 export default async function services(container, io) {
   const connection = await (new TypeOrm()).getConnection();
   container.registerService('typeorm.connection', connection);
@@ -29,6 +31,8 @@ export default async function services(container, io) {
   container.registerService('Constants', Constants);
 
   container.registerService('io', io);
+
+  container.registerService('energentwellheader', new Energentwellheader());
 
   const notificationManager = new NotificationManager();
 
@@ -48,7 +52,7 @@ export default async function services(container, io) {
   container.registerService('dummy.list', new DummyList(container.get('dummy.repository')));
   const dummyList = container.get('dummy.list');
   const dummy = await dummyList.findOne();
-  let id = dummy.id;
+  /* let id = dummy.id;
   setInterval(async () => {
     const dummy = await dummyList.findOne({ id });
     id = dummy.id + 1;
@@ -56,7 +60,7 @@ export default async function services(container, io) {
     socketService.send({
       queue: 'dashboard.chart', payload: [(new Date()).getTime(), dummy.pressure]
     });
-  }, 2000);
+  }, 2000); */
 
   container.registerService('account.repository', new AccountRepository(connection));
   container.registerService('account.manager', new AccountManager(container.get('account.repository')));

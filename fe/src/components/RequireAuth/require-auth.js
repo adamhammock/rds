@@ -11,7 +11,6 @@ export default class Authentication extends Component {
   }
 
   componentWillMount() {
-    console.log(this.props.history)
     if (!this.props.authenticated) {
       this.props.history.push('/login');
     }

@@ -1,7 +1,7 @@
 import config from './vars';
 import express from './express';
 import services from './../api/services';
-import Container from './../lib/Container';
+import Container from './../app/lib/Container';
 
 const container = new Container();
 

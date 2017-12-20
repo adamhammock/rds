@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
 import { Account } from "./Account";
-import { USER_POSITION, USER_ASSET, USER_TYPE } from './../app/etc/Constants';
+import { USER_POSITION, USER_ASSET, USER_TYPE } from './../etc/Constants';
 
 @Entity()
 export class User {

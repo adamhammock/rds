@@ -43,7 +43,6 @@ class Login extends Component {
   };
 
   handleFormSubmit(formProps) {
-    console.log('handleFormSubmit', formProps);
     const { username, password } = formProps;
     this.props.loginUser({ username, password }, this.onSuccessLogin);
   };

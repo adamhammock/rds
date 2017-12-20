@@ -6,19 +6,19 @@
   "password": "test",
   "database": "reservoirdata",
   "synchronize": true,
-  "logging": false,
+  "logging": true,
   "entities": [
-    "src/entity/**/*.ts"
+    "src/app/entity/**/*.ts"
   ],
   "migrations": [
-    "src/migration/**/*.ts"
+    "src/app/migration/**/*.ts"
   ],
   "subscribers": [
-    "src/subscriber/**/*.ts"
+    "src/app/subscriber/**/*.ts"
   ],
   "cli": {
-    "entitiesDir": "src/entity",
-    "migrationsDir": "src/migration",
-    "subscribersDir": "src/subscriber"
+    "entitiesDir": "src/app/entity",
+    "migrationsDir": "src/app/migration",
+    "subscribersDir": "src/app/subscriber"
   }
 }
