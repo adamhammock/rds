@@ -22,11 +22,14 @@ import {
   Input,
   Table
 } from "reactstrap";
-
 import Highcharts from 'highcharts';
 import {
   HighchartsChart, Chart, withHighcharts, XAxis, YAxis, Title, Subtitle, Legend, LineSeries
 } from 'react-jsx-highcharts';
+
+
+import Widget02 from './../../views/Widgets/Widget02';
+import Widget04 from './../../views/Widgets/Widget04';
 
 const DASHBOARD_CHART = 'dashboard.chart';
 
@@ -491,7 +494,7 @@ class Dashboard extends Component {
 
   async componentWillMount() {
     await this.props.connectSocket();
-    await this.props.on(DASHBOARD_CHART, data => {});
+    await this.props.on(DASHBOARD_CHART, data => { });
   }
 
   async componentWillUnmount() {
@@ -510,125 +513,30 @@ class Dashboard extends Component {
     return (
       <div className="animated fadeIn">
         <Row>
-          <Col xs="12" sm="6" lg="3">
-            <Card className="text-white bg-primary">
-              <CardBlock className="card-body pb-0">
-                <ButtonGroup className="float-right">
-                  <ButtonDropdown id='card1' isOpen={this.state.card1}
-                    toggle={() => { this.setState({ card1: !this.state.card1 }); }}>
-                    <DropdownToggle caret className="p-0" color="transparent">
-                      <i className="icon-settings"></i>
-                    </DropdownToggle>
-                    <DropdownMenu className={this.state.card1 ? "show" : ""} right>
-                      <DropdownItem>Action</DropdownItem>
-                      <DropdownItem>Another action</DropdownItem>
-                      <DropdownItem disabled>Disabled action</DropdownItem>
-                      <DropdownItem>Something else here</DropdownItem>
-                    </DropdownMenu>
-                  </ButtonDropdown>
-                </ButtonGroup>
-                <h4 className="mb-0">9.823</h4>
-                <p>Average DFIT psi</p>
-              </CardBlock>
-              <div className="chart-wrapper px-3" style={{ height: '70px' }}>
-                <Line data={cardChartData1} options={cardChartOpts1} height={70} />
-              </div>
-            </Card>
-          </Col>
-
-          <Col xs="12" sm="6" lg="3">
-            <Card className="text-white bg-info">
-              <CardBlock className="card-body pb-0">
-                <ButtonGroup className="float-right">
-                  <Dropdown id='card2' isOpen={this.state.card2}
-                    toggle={() => { this.setState({ card2: !this.state.card2 }); }}>
-                    <DropdownToggle caret className="p-0" color="transparent">
-                      <i className="icon-settings"></i>
-                    </DropdownToggle>
-                    <DropdownMenu className={this.state.card2 ? "show" : ""} right>
-                      <DropdownItem>Action</DropdownItem>
-                      <DropdownItem>Another action</DropdownItem>
-                      <DropdownItem>Something else here</DropdownItem>
-                    </DropdownMenu>
-                  </Dropdown>
-                </ButtonGroup>
-                <h4 className="mb-0">9.823</h4>
-                <p>Average Frac psi</p>
-              </CardBlock>
-              <div className="chart-wrapper px-3" style={{ height: '70px' }}>
-                <Line data={cardChartData2} options={cardChartOpts2} height={70} />
-              </div>
-            </Card>
-          </Col>
-
-          <Col xs="12" sm="6" lg="3">
-            <Card className="text-white bg-warning">
-              <CardBlock className="card-body pb-0">
-                <ButtonGroup className="float-right">
-                  <Dropdown id='card3' isOpen={this.state.card3}
-                    toggle={() => { this.setState({ card3: !this.state.card3 }); }}>
-                    <DropdownToggle caret className="p-0" color="transparent">
-                      <i className="icon-settings"></i>
-                    </DropdownToggle>
-                    <DropdownMenu className={this.state.card3 ? "show" : ""} right>
-                      <DropdownItem>Action</DropdownItem>
-                      <DropdownItem>Another action</DropdownItem>
-                      <DropdownItem>Something else here</DropdownItem>
-                    </DropdownMenu>
-                  </Dropdown>
-                </ButtonGroup>
-                <h4 className="mb-0">9.823</h4>
-                <p>Flowrate</p>
-              </CardBlock>
-              <div className="chart-wrapper px-0" style={{ height: '70px' }}>
-                <Line data={cardChartData3} options={cardChartOpts3} height={70} />
-              </div>
-            </Card>
-          </Col>
-
-          <Col xs="12" sm="6" lg="3">
-            <Card className="text-white bg-danger">
-              <CardBlock className="card-body pb-0">
-                <ButtonGroup className="float-right">
-                  <ButtonDropdown id='card4' isOpen={this.state.card4}
-                    toggle={() => { this.setState({ card4: !this.state.card4 }); }}>
-                    <DropdownToggle caret className="p-0" color="transparent">
-                      <i className="icon-settings"></i>
-                    </DropdownToggle>
-                    <DropdownMenu className={this.state.card4 ? "show" : ""} right>
-                      <DropdownItem>Action</DropdownItem>
-                      <DropdownItem>Another action</DropdownItem>
-                      <DropdownItem>Something else here</DropdownItem>
-                    </DropdownMenu>
-                  </ButtonDropdown>
-                </ButtonGroup>
-                <h4 className="mb-0">9.823</h4>
-                <p>Previous Week psi</p>
-              </CardBlock>
-              <div className="chart-wrapper px-3" style={{ height: '70px' }}>
-                <Bar data={cardChartData4} options={cardChartOpts4} height={70} />
-              </div>
-            </Card>
+          <Col sm={{ size: 6 }}>
+            <Row>
+              <Col xs="12" sm="6">
+                <Widget02 icon="icon-graph" color="primary" header="1472.37 psi" value="100">DFIT Pressure</Widget02>
+              </Col>
+              <Col xs="12" sm="6">
+                <Widget04 icon="icon-graph" color="primary" header="431.29 bpm" value="100">DFIT Rate</Widget04>
+              </Col>
+            </Row>
           </Col>
         </Row>
         <Row>
           <Col>
             <Card>
               <CardBlock className="card-body">
-                <div className="chart-wrapper" style={{ height: 400 + 'px', marginTop: 40 + 'px' }}>
+                <div className="chart-wrapper" style={{ height: 400 + 'px' }}>
                   <HighchartsChart>
                     <Chart />
-
                     <Title>Solar Employment Growth by Sector, 2010-2016</Title>
-
                     <Subtitle>Source: thesolarfoundation.com</Subtitle>
-
                     <Legend layout="vertical" align="right" verticalAlign="middle" />
-
                     <XAxis categories={this.props.xAxis}>
                       <XAxis.Title>Time</XAxis.Title>
                     </XAxis>
-
                     <YAxis id="number">
                       <YAxis.Title>Number of employees</YAxis.Title>
                       <LineSeries id="other" name="Other" data={this.props.yAxis} />
